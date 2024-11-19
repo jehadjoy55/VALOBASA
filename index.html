@@ -3,134 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>প্রিয় মাহনূর</title>
+    <title>প্রেমের আকাশ</title>
     <style>
-        /* Body styling for mobile scrolling */
-        body {
-            font-family: 'SolaimanLipi', sans-serif;
-            background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+        /* General Reset */
+        * {
             margin: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        #scroll-container {
-            max-height: 100vh;
-            overflow-y: auto;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
+            padding: 0;
             box-sizing: border-box;
         }
 
-        #poem-container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 500px;
-            animation: fadeIn 3s ease-in-out;
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(to bottom, #001d3d, #013a63, #01497c, #014f86, #001233);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
         }
 
-        h1 {
-            color: #ff5e73;
-            font-size: 2em;
-            margin: 0;
-        }
-
-        p {
-            font-size: 1.2em;
-            color: #333;
-            line-height: 1.6em;
-            margin: 20px 0;
-        }
-
-        /* Heart animation */
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        @keyframes floatHeart {
-            0% { opacity: 0; transform: translateY(0); }
-            50% { opacity: 1; }
-            100% { opacity: 0; transform: translateY(-100px); }
-        }
-
-        /* Floating hearts */
-        .heart {
+        /* Moon */
+        .moon {
             position: absolute;
-            color: #ff5e73;
-            font-size: 1.5em;
-            animation: floatHeart 4s infinite;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
         }
-        .heart:nth-child(1) { top: 80%; left: 30%; animation-delay: 0s; }
-        .heart:nth-child(2) { top: 85%; left: 60%; animation-delay: 1s; }
-        .heart:nth-child(3) { top: 90%; left: 45%; animation-delay: 2s; }
-        .heart:nth-child(4) { top: 88%; left: 20%; animation-delay: 3s; }
 
-        /* Play button styling */
-        #play-button {
-            margin-top: 15px;
-            padding: 10px 20px;
-            font-size: 1em;
-            color: #ffffff;
-            background-color: #ff5e73;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease;
+        .moon::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 20%;
+            width: 60px;
+            height: 60px;
+            background: #001d3d;
+            border-radius: 50%;
         }
-        #play-button:hover {
-            background-color: #ff4a63;
+
+        /* Heart Cloud */
+        .heart-cloud {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 100px;
+            background: #ffc0cb;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
+        }
+
+        .heart-cloud::before,
+        .heart-cloud::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 100px;
+            background: #ffc0cb;
+            border-radius: 50%;
+        }
+
+        .heart-cloud::before {
+            top: -60px;
+            left: 0;
+        }
+
+        .heart-cloud::after {
+            top: 0;
+            left: 60px;
+        }
+
+        /* Trees */
+        .tree {
+            position: absolute;
+            bottom: 0;
+            width: 150px;
+            height: 300px;
+            background: linear-gradient(to top, #663300, #cc6600);
+            clip-path: polygon(50% 0, 90% 30%, 80% 40%, 100% 60%, 60% 80%, 70% 100%, 30% 100%, 40% 80%, 0 60%, 20% 40%, 10% 30%);
+        }
+
+        .tree.left {
+            left: 10%;
+        }
+
+        .tree.right {
+            right: 10%;
+        }
+
+        /* Poem Container */
+        .poem-container {
+            position: absolute;
+            bottom: 15%;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        .poem-container h1 {
+            font-size: 2rem;
+            color: #ffcccb;
+            margin-bottom: 10px;
+            text-shadow: 0 3px 5px rgba(0, 0, 0, 0.8);
+        }
+
+        .poem-container p {
+            font-size: 1.4rem;
+            line-height: 2;
+            color: #ffffff;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
         }
     </style>
 </head>
 <body>
-    <div id="scroll-container">
-        <div id="poem-container">
-            <h1>প্রিয় মাহু,</h1>
-            <p>তোমার মধুর হাসি আমার হৃদয়ে অমৃতের মতো, <br>
-            প্রতিটি স্বপ্নে তুমি, প্রতি নিশ্বাসে তুমি।<br>
-            রাতের নির্জনে তোমার স্মৃতির ছোঁয়ায়,<br>
-            আমার মন সিক্ত হয় ভালোবাসার মায়ায়।<br><br>
-            চিরকাল শুধু তোমার জন্য, <br>
-            এই হৃদয় থাকবে অপেক্ষায়, <br>
-            সীমাহীন ভালোবাসায় চিরন্তন অঙ্গীকার।<br><br>
-            তোমার জন্যই, প্রিয় মাহনূর। ❤️</p>
-            <!-- Play Music Button -->
-            <button id="play-button" onclick="toggleMusic()">🎶 Play Music</button>
-        </div>
+    <!-- Crescent Moon -->
+    <div class="moon"></div>
+
+    <!-- Heart Cloud -->
+    <div class="heart-cloud"></div>
+
+    <!-- Trees -->
+    <div class="tree left"></div>
+    <div class="tree right"></div>
+
+    <!-- Poem Section -->
+    <div class="poem-container">
+        <h1>তোমার জন্য</h1>
+        <p>
+            রাতের আকাশে চাঁদের মতো,<br>
+            তুমি আলোকিত করো আমার জীবন।<br>
+            তোমার ভালোবাসা প্রতিটি মুহূর্তে,<br>
+            আমাকে পূর্ণতা দেয়।<br>
+            দূরত্ব যতই হোক,<br>
+            হৃদয়ের কাছাকাছি তুমি।<br>
+            চিরকাল আমি তোমার জন্য,<br>
+            ভালোবাসার চিহ্ন রাখব।<br>
+        </p>
     </div>
-
-    <!-- Floating hearts for animation -->
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-    <div class="heart">❤️</div>
-
-    <!-- Audio Element -->
-    <audio id="background-music" src="iloveu.mp3" loop></audio>
-
-    <script>
-        const music = document.getElementById('background-music');
-        const playButton = document.getElementById('play-button');
-
-        function toggleMusic() {
-            if (music.paused) {
-                music.play();
-                playButton.textContent = '⏸ Pause Music';
-            } else {
-                music.pause();
-                playButton.textContent = '🎶 Play Music';
-            }
-        }
-    </script>
 </body>
 </html>
