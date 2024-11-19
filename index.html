@@ -148,6 +148,47 @@
             চিরকাল আমি তোমার জন্য,<br>
             ভালোবাসার চিহ্ন রাখব।<br>
         </p>
+   <script>
+        <!-- Audio Element -->
+    <audio id="backgroundMusic" src="11.mp3"></audio>
+
+    <script>
+        function playMusic() {
+            const audio = document.getElementById("backgroundMusic");
+            const playText = document.getElementById("playText");
+
+            if (audio.paused) {
+                audio.play();
+                playText.classList.add("clicked");
+                playText.textContent = "I LOVE YOU MAHU ❤️";
+            }
+        }
+
+        // Adjust body class based on the user's local time
+        function adjustForTime() {
+            const date = new Date();
+            const hours = date.getHours();
+
+            const body = document.body;
+            const sun = document.getElementById("sun");
+            const moon = document.getElementById("moon");
+
+            if (hours >= 6 && hours < 18) {
+                body.classList.add("day");
+                body.classList.remove("night");
+                sun.style.display = "block";
+                moon.style.display = "none";
+            } else {
+                body.classList.add("night");
+                body.classList.remove("day");
+                sun.style.display = "none";
+                moon.style.display = "block";
+            }
+        }
+
+        // Call the function on load
+        window.onload = adjustForTime;
+    </script>
     </div>
 </body>
 </html>
