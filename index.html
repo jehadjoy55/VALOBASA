@@ -15,32 +15,30 @@
         body {
             font-family: 'Georgia', serif;
             background: linear-gradient(to bottom, #001d3d, #013a63, #01497c, #014f86, #001233);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             min-height: 100vh;
-            overflow: hidden;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            overflow-y: auto;
+            padding: 20px;
         }
 
         /* Moon */
         .moon {
-            position: absolute;
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 80px;
-            background: #ffffff;
+            margin: 20px auto;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #ffffff 70%, #d4d4d4);
             border-radius: 50%;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6);
         }
 
         .moon::before {
             content: '';
             position: absolute;
-            top: 10%;
-            left: 20%;
+            top: 20%;
+            left: 25%;
             width: 60px;
             height: 60px;
             background: #001d3d;
@@ -49,15 +47,13 @@
 
         /* Heart Cloud */
         .heart-cloud {
-            position: absolute;
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            margin: 20px auto;
             width: 120px;
             height: 100px;
-            background: #ffc0cb;
+            background: linear-gradient(to bottom, #ff99b9, #ff80ab);
             border-radius: 50%;
-            box-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
+            box-shadow: 0 0 30px rgba(255, 182, 193, 0.6);
+            position: relative;
         }
 
         .heart-cloud::before,
@@ -66,7 +62,7 @@
             position: absolute;
             width: 120px;
             height: 100px;
-            background: #ffc0cb;
+            background: linear-gradient(to bottom, #ff99b9, #ff80ab);
             border-radius: 50%;
         }
 
@@ -80,37 +76,19 @@
             left: 60px;
         }
 
-        /* Trees */
-        .tree {
-            position: absolute;
-            bottom: 0;
-            width: 150px;
-            height: 300px;
-            background: linear-gradient(to top, #663300, #cc6600);
-            clip-path: polygon(50% 0, 90% 30%, 80% 40%, 100% 60%, 60% 80%, 70% 100%, 30% 100%, 40% 80%, 0 60%, 20% 40%, 10% 30%);
-        }
-
-        .tree.left {
-            left: 10%;
-        }
-
-        .tree.right {
-            right: 10%;
-        }
-
         /* Poem Container */
         .poem-container {
-            position: absolute;
-            bottom: 15%;
             text-align: center;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+            color: #fff;
+            margin-bottom: 30px;
         }
 
         .poem-container h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #ffcccb;
             margin-bottom: 10px;
             text-shadow: 0 3px 5px rgba(0, 0, 0, 0.8);
@@ -122,6 +100,35 @@
             color: #ffffff;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
         }
+
+        /* Audio Play Button */
+        #musicButton {
+            position: fixed;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(to bottom right, #ff6699, #ff3366);
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(255, 51, 102, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #musicButton:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 51, 102, 0.8);
+        }
+
+        #playText {
+            font-size: 1.2rem;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        #playText.clicked {
+            color: #ffe4e1;
+        }
     </style>
 </head>
 <body>
@@ -130,10 +137,6 @@
 
     <!-- Heart Cloud -->
     <div class="heart-cloud"></div>
-
-    <!-- Trees -->
-    <div class="tree left"></div>
-    <div class="tree right"></div>
 
     <!-- Poem Section -->
     <div class="poem-container">
@@ -148,12 +151,18 @@
             চিরকাল আমি তোমার জন্য,<br>
             ভালোবাসার চিহ্ন রাখব।<br>
         </p>
-   <script>
-        <!-- Audio Element -->
-    <audio id="backgroundMusic" src="11.mp3"></audio>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="backgroundMusic" src="22 (2).mp3"></audio>
+
+    <!-- Audio Button -->
+    <div id="musicButton" onclick="toggleMusic()">
+        <span id="playText">PLAY</span>
+    </div>
 
     <script>
-        function playMusic() {
+        function toggleMusic() {
             const audio = document.getElementById("backgroundMusic");
             const playText = document.getElementById("playText");
 
@@ -161,34 +170,12 @@
                 audio.play();
                 playText.classList.add("clicked");
                 playText.textContent = "I LOVE YOU MAHU ❤️";
-            }
-        }
-
-        // Adjust body class based on the user's local time
-        function adjustForTime() {
-            const date = new Date();
-            const hours = date.getHours();
-
-            const body = document.body;
-            const sun = document.getElementById("sun");
-            const moon = document.getElementById("moon");
-
-            if (hours >= 6 && hours < 18) {
-                body.classList.add("day");
-                body.classList.remove("night");
-                sun.style.display = "block";
-                moon.style.display = "none";
             } else {
-                body.classList.add("night");
-                body.classList.remove("day");
-                sun.style.display = "none";
-                moon.style.display = "block";
+                audio.pause();
+                playText.classList.remove("clicked");
+                playText.textContent = "PLAY";
             }
         }
-
-        // Call the function on load
-        window.onload = adjustForTime;
     </script>
-    </div>
 </body>
 </html>
